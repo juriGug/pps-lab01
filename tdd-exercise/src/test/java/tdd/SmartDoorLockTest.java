@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
 
+    public static final int SMART_LOCK_PIN = 1234;
     SmartDoorLockImpl smartPort;
 
     @BeforeEach
@@ -17,5 +18,13 @@ public class SmartDoorLockTest {
     @Test
     public void testIsPortLock() {
         assertFalse(smartPort.isLocked());
+    }
+
+    @Test
+    public void testSetPin() {
+        assertFalse(smartPort.isLocked());
+        smartPort.setPin(SMART_LOCK_PIN);
+        smartPort.lock();
+        assertTrue(smartPort.isLocked());
     }
 }

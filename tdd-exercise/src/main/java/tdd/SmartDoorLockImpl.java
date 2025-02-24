@@ -1,9 +1,14 @@
 package tdd;
 
 public class SmartDoorLockImpl implements SmartDoorLock{
+
+    private int pin = 0;
+    private boolean lock = false;
+
     @Override
     public void setPin(int pin) {
-
+        if(!isLocked() && pin > 999 && pin < 10000)
+            this.pin = pin;
     }
 
     @Override
@@ -13,12 +18,13 @@ public class SmartDoorLockImpl implements SmartDoorLock{
 
     @Override
     public void lock() {
-
+        if(pin != 0)
+            lock = true;
     }
 
     @Override
     public boolean isLocked() {
-        return false;
+        return lock;
     }
 
     @Override
