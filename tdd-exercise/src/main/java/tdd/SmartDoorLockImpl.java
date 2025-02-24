@@ -2,6 +2,7 @@ package tdd;
 
 public class SmartDoorLockImpl implements SmartDoorLock{
 
+    public static final int DAFAULT_PIN_VALUE = 0;
     private int pin;
     private boolean lock = false;
     private boolean block = false;
@@ -16,20 +17,21 @@ public class SmartDoorLockImpl implements SmartDoorLock{
 
     @Override
     public void unlock(int pin) {
-        if(this.pin == pin) {
-            lock = false;
-            counterFailedAttempts = 0;
-        }
-        else {
-            this.counterFailedAttempts++;
-            if(counterFailedAttempts == MAX_ATTEMPTS)
-                block = true;
+        if(lock && !block) {
+            if (this.pin == pin) {
+                lock = false;
+                counterFailedAttempts = 0;
+            } else {
+                this.counterFailedAttempts++;
+                if (counterFailedAttempts == MAX_ATTEMPTS)
+                    block = true;
+            }
         }
     }
 
     @Override
     public void lock() {
-        if(this.pin != 0)
+        if(this.pin != DAFAULT_PIN_VALUE)
             this.lock = true;
         else
             throw new IllegalStateException("You must have set the pin");
@@ -58,6 +60,9 @@ public class SmartDoorLockImpl implements SmartDoorLock{
 
     @Override
     public void reset() {
-
+        this.pin = DAFAULT_PIN_VALUE;
+        this.block = false;
+        this.lock = false;
+        this.counterFailedAttempts = 0;
     }
 }
