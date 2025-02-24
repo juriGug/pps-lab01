@@ -21,14 +21,20 @@ public class SmartDoorLockTest {
     }
 
     @Test
-    public void testSetPin() {
+    public void testSetPinAndLockAndUnlockPort() {
         this.smartPort.setPin(SMART_LOCK_PIN);
         this.smartPort.lock();
         assertTrue(smartPort.isLocked());
+        this.smartPort.unlock(SMART_LOCK_PIN);
+        assertFalse(smartPort.isLocked());
     }
 
     @Test
     public void testExceptionLock() {
         assertThrows(IllegalStateException.class, ()-> this.smartPort.lock());
+    }
+
+    @Test
+    public void testUnlockPort() {
     }
 }
