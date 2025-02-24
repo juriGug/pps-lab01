@@ -58,4 +58,10 @@ class SimpleBankAccountTest {
         bankAccount.withdraw(SECOND_USER_ID, FIRST_WITHDRAW);
         assertEquals(FIRST_DEPOSIT, bankAccount.getBalance());
     }
+
+    @Test
+    void testWithdrawNotAllowed() {
+        bankAccount.withdraw(accountHolder.getId(), FIRST_WITHDRAW);
+        assertEquals(INITIAL_BANK_ACCOUNT_BALANCE, bankAccount.getBalance());
+    }
 }
