@@ -2,7 +2,7 @@ package tdd;
 
 public class SmartDoorLockImpl implements SmartDoorLock{
 
-    private int pin = 0;
+    private int pin;
     private boolean lock = false;
 
     @Override
@@ -20,7 +20,10 @@ public class SmartDoorLockImpl implements SmartDoorLock{
     public void lock() {
         if(pin != 0)
             lock = true;
+        else
+            throw new IllegalStateException("You must have set the pin");
     }
+
 
     @Override
     public boolean isLocked() {
